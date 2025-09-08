@@ -133,4 +133,9 @@ public class WorldGrid : Singleton<WorldGrid>
         int y = Mathf.Clamp(position.y, 0, m_grid.height - 1);
         return new(x, y);
     }
+
+    public T GetObjectAtPosition<T>(int x, int y) where T : GridObject
+    {
+        return (T)m_grid[x, y].Find((GridObject gObj) => gObj as T != null);
+    }
 }
