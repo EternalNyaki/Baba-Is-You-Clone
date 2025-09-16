@@ -20,7 +20,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     }
 
     //The singleton instance itself
-    protected static T _instance;
+    private static T _instance;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +33,7 @@ public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
         }
         else if (_instance != this)
         {
-            Debug.LogWarning($"Cannot have multiple {this.GetType().Name} objects in one scene. Destroying the newest");
+            Debug.LogWarning($"Cannot have multiple {GetType().Name} objects in one scene. Destroying the newest instance");
             Destroy(this);
         }
     }

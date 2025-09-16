@@ -6,27 +6,35 @@ using UnityEngine;
 /// Grid Player Controller
 /// Temporary class for testing grid movement
 /// </summary>
+[System.Obsolete]
 public class GridPlayerController : GridObject
 {
-    protected override void LogicUpdate()
+    protected override void Initialize()
     {
-        base.LogicUpdate();
+        base.Initialize();
 
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        GameEventManager.Instance.playerInputEvent += Move;
+    }
+
+    private void Move(object sender, InputEventArgs e)
+    {
+        switch (e.KeyCode)
         {
-            WorldGrid.Instance.MoveGridObject(this, Direction.Up);
-        }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            WorldGrid.Instance.MoveGridObject(this, Direction.Right);
-        }
-        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            WorldGrid.Instance.MoveGridObject(this, Direction.Down);
-        }
-        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            WorldGrid.Instance.MoveGridObject(this, Direction.Left);
+            case KeyCode.UpArrow:
+                WorldGrid.Instance.MoveGridObject(this, Direction.Up);
+                break;
+
+            case KeyCode.RightArrow:
+                WorldGrid.Instance.MoveGridObject(this, Direction.Right);
+                break;
+
+            case KeyCode.DownArrow:
+                WorldGrid.Instance.MoveGridObject(this, Direction.Down);
+                break;
+
+            case KeyCode.LeftArrow:
+                WorldGrid.Instance.MoveGridObject(this, Direction.Left);
+                break;
         }
     }
 }

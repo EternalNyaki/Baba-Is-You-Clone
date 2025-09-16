@@ -58,11 +58,10 @@ public class WorldGrid : Singleton<WorldGrid>
     /// <param name="direction"></param>
     public void MoveGridObject(GridObject gridObject, Direction direction)
     {
+        gridObject.facingDirection = direction;
 
         //Remove the object from the grid for while movement logic is being perfomed
         m_grid[gridObject.position.x, gridObject.position.y].Remove(gridObject);
-
-        gridObject.facingDirection = direction;
 
         //Update object position
         switch (direction)
@@ -96,7 +95,7 @@ public class WorldGrid : Singleton<WorldGrid>
         {
             if (cellValue[i] != gridObject)
             {
-                cellValue[i].OnCellEntered(this, gridObject);
+                GameEventManager.Instance.NotifyCellEntered(gridObject, gridObject.position);
             }
         }
     }

@@ -19,8 +19,7 @@ public class GridObject : MonoBehaviour
     public Vector2Int position;
     public Direction facingDirection;
 
-    //Event to be called whenever another grid object enters the same cell
-    public event System.EventHandler<GridObject> cellEnteredEvent;
+    public System.Predicate<GridObject> blockMovement = (GridObject gObj) => true;
 
     void Start()
     {
@@ -48,8 +47,9 @@ public class GridObject : MonoBehaviour
     /// </summary>
     protected virtual void LogicUpdate() { }
 
-    public void OnCellEntered(object sender, GridObject source)
+    public void DestroySelf()
     {
-        cellEnteredEvent?.Invoke(sender, source);
+        GameEventManager.Instance.NotifyObjectDestruction(gameObject);
+        Destroy(gameObject);
     }
 }

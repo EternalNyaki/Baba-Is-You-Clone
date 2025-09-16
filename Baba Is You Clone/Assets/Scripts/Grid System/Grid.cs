@@ -30,7 +30,7 @@ public class Grid<T> : IEnumerable
     }
 
     /// <summary>
-    /// Gets the position of the cell at position (x, y) relative to the center of the grid
+    /// Gets the world position of the cell at position (x, y) relative to the center of the grid
     /// </summary>
     /// <param name="x"></param>
     /// <param name="y"></param>
@@ -70,7 +70,7 @@ public class Grid<T> : IEnumerable
 
     IEnumerator IEnumerable.GetEnumerator()
     {
-        return (IEnumerator)GetEnumerator();
+        return GetEnumerator();
     }
 
     public GridEnum<T> GetEnumerator()
